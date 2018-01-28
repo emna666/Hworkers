@@ -1,0 +1,32 @@
+{% import 'back/forms.html.twig' as forms %}
+{% extends 'back/base.html.twig' %}
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card card-outline-info">
+
+                <div class="card-body">
+                    <h4 class="card-title"> {% if app.request.get('id') is null %}Ajouter{% else %}Modifier{% endif %} Partenaire</h4>
+                    {{ form_start(form) }}
+                    <div class="form-body">
+                        <div class="row p-t-20">
+                            {{ forms.input("col-md-6","Libelle FR ",form.labelFr,true) }}
+                            {{ forms.input("col-md-6","Libelle EN",form.labelEn,false) }}
+
+                        </div>
+                        <div class="row p-t-20">
+                            {{ forms.input("col-md-6","Libelle AR",form.labelAr,false) }}
+                            {{ forms.input("col-md-6","Image",form.imageFile,false) }}
+                        </div>
+                        <div class="row p-t-20">
+                            {{ forms.switch("col-md-6","Active",form.active) }}
+                        </div>
+                        {{ forms.submit("Enregister") }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock  %}

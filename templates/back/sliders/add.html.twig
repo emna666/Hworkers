@@ -1,0 +1,35 @@
+{% import 'back/forms.html.twig' as forms %}
+{% extends 'back/base.html.twig' %}
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card card-outline-info">
+
+                <div class="card-body">
+                    <h4 class="card-title"> {% if app.request.get('id') is null %}Ajouter{% else %}Modifier{% endif %} SLIDER</h4>
+                    {{ form_start(form) }}
+                    <div class="form-body">
+                    <div class="row p-t-20">
+                        {{ forms.input("col-md-6","Libelle FR ",form.textFr,true) }}
+                        {{ forms.input("col-md-6","Libelle FR",form.textEn,false) }}
+
+                    </div>
+                    <div class="row p-t-20">
+                        {{ forms.input("col-md-6","Libelle FR",form.textAr,false) }}
+                        {{ forms.input("col-md-6","Ordre",form.ordre,true) }}
+
+                    </div>
+                    <div class="row p-t-20">
+                        {{ forms.input("col-md-6","Image",form.imageFile,false) }}
+                        {{ forms.switch("col-md-6","Active",form.active) }}
+
+                    </div>
+                    {{ forms.submit("Enregister") }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock  %}

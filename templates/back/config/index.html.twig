@@ -1,0 +1,71 @@
+{% extends 'back/base.html.twig' %}
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Configuration</h4>
+
+            <table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list footable-loaded footable" data-page-size="10">
+                <thead>
+                <tr>
+                    <th class="footable-sortable">Id<span class="footable-sort-indicator"></span></th>
+                    <th class="footable-sortable">Logo<span class="footable-sort-indicator"></span></th>
+                    <th class="footable-sortable">Adresse<span class="footable-sort-indicator"></span></th>
+                    <th class="footable-sortable">Téléphone<span class="footable-sort-indicator"></span></th>
+                    <th class="footable-sortable">Facebook<span class="footable-sort-indicator"></span></th>
+                    <th class="footable-sortable">Linkedin<span class="footable-sort-indicator"></span></th>
+                    <th class="footable-sortable">Instagram<span class="footable-sort-indicator"></span></th>
+
+                    <th class="footable-sortable">Actions</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for config in configurations %}
+                    <tr class="footable-even" style="">
+                        <td><span class="footable-toggle"></span>{{ config.id }}</td>
+                        <td> <img src="{{ vich_uploader_asset(config, 'imageFile') }}"  width="40px" /></td>
+                        <td>{{ config.adresseFr }}</td>
+                        <td>{{ config.phoneFr }}</td>
+                        <td><{{ config.emailFr }} </td>
+                        <td><{{ config.facebookLink }} </td>
+                        <td><{{ config.linkedinLink }} </td>
+                        <td><{{ config.instagramLink }} </td>
+
+
+                        <td>
+                            <a href="{{ path('edit_config', { 'id': config.id})}}">
+                                <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline edit-row-btn" data-toggle="tooltip" data-original-title="Modifier">
+                                    <i class="ti-pencil" aria-hidden="true"></i>
+                                </button>
+                            </a>
+                            <a href="{{ path('show_config', { 'id': config.id})}}">
+                                <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Supprimer">
+                                    <i class="ti-close" aria-hidden="true"></i>
+                                </button>
+                            </a>
+
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <a href="{{ path('add_partner') }}">
+                            <button type="button" class="btn btn-info btn-rounded" data-toggle="modal" data-target="#add-contact">
+                                Ajouter partenaire </button>
+                        </a>
+                    </td>
+
+                    <td colspan="7">
+                        <div class="text-right">
+                            <ul class="pagination"> <li class="footable-page-arrow disabled"><a data-page="first" href="#first">«</a></li><li class="footable-page-arrow disabled"><a data-page="prev" href="#prev">‹</a></li><li class="footable-page active"><a data-page="0" href="#">1</a></li><li class="footable-page"><a data-page="1" href="#">2</a></li><li class="footable-page-arrow"><a data-page="next" href="#next">›</a></li><li class="footable-page-arrow"><a data-page="last" href="#last">»</a></li></ul>
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
+{% endblock %}

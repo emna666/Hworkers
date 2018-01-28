@@ -1,0 +1,66 @@
+{% extends 'back/base.html.twig' %}
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Liste des elements slider</h4>
+
+            <table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list footable-loaded footable" data-page-size="10">
+                <thead>
+                <tr>
+                    <th class="footable-sortable">Id<span class="footable-sort-indicator"></span></th>
+                    <th class="footable-sortable">Label FR<span class="footable-sort-indicator"></span></th>
+                    <th class="footable-sortable">Label EN<span class="footable-sort-indicator"></span></th>
+                    <th class="footable-sortable">Label AR<span class="footable-sort-indicator"></span></th>
+                    <th class="footable-sortable">Ordre<span class="footable-sort-indicator"></span></th>
+                    <th class="footable-sortable">Image<span class="footable-sort-indicator"></span></th>
+                    <th class="footable-sortable">Actions</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for slider in sliders %}
+                <tr class="footable-even" style="">
+                    <td><span class="footable-toggle"></span>{{ slider.id }}</td>
+                    <td>{{ slider.textFr }}</td>
+                    <td>{{ slider.textEN }}</td>
+                    <td><{{ slider.textAR }} </td>
+                    <td>{{ slider.ordre }}</td>
+                    <td> <img src="{{ vich_uploader_asset(slider, 'imageFile') }}" alt="{{ slider.textFr }}" width="40px" /></td>
+
+                    <td>
+                        <a href="{{ path('edit_slider', { 'id': slider.id})}}">
+                            <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline edit-row-btn" data-toggle="tooltip" data-original-title="Modifier">
+                                <i class="ti-pencil" aria-hidden="true"></i>
+                            </button>
+                        </a>
+                        <a href="{{ path('delete_slider', { 'id': slider.id})}}">
+                            <button type="button" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-original-title="Supprimer">
+                                <i class="ti-close" aria-hidden="true"></i>
+                            </button>
+                        </a>
+
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <a href="{{ path('add_slider') }}">
+                        <button type="button" class="btn btn-info btn-rounded" data-toggle="modal" data-target="#add-contact">
+                            Ajouter une nouvelle image </button>
+                            </a>
+                    </td>
+
+                    <td colspan="7">
+                        <div class="text-right">
+                            <ul class="pagination"> <li class="footable-page-arrow disabled"><a data-page="first" href="#first">«</a></li><li class="footable-page-arrow disabled"><a data-page="prev" href="#prev">‹</a></li><li class="footable-page active"><a data-page="0" href="#">1</a></li><li class="footable-page"><a data-page="1" href="#">2</a></li><li class="footable-page-arrow"><a data-page="next" href="#next">›</a></li><li class="footable-page-arrow"><a data-page="last" href="#last">»</a></li></ul>
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
+{% endblock %}

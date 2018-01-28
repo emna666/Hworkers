@@ -1,0 +1,100 @@
+{% macro input(class,label,from,required,smallText=null,value=null) %}
+    <div class="{{ class }}">
+        <div class="form-group">
+            {% if label is not null %}
+                <label class="control-label">
+                    {{ label|raw }} {% if required==true %}<span class="text-danger">*</span>{% endif %}
+                </label>
+            {% endif %}
+            {% if value is null %}
+                {{ form_widget(from,{'attr':{'class':'form-control'}}) | raw }}
+            {% else %}
+                {{ form_widget(from,{'attr':{'value':value,'class':'form-control'}}) | raw }}
+            {% endif %}
+            {{ form_errors(from) | raw }}
+            {% if smallText is not null %}
+                <small>{{ smallText }}</small>
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}
+{% macro password(class,label,name,value=null,required=true) %}
+    <div class="{{ class }}">
+        <div class="form-group">
+            {% if label is not null %}
+                <label class="control-label">
+                    {{ label|raw }} {% if required==true %}<span class="text-danger">*</span>{% endif %}
+                </label>
+            {% endif %}
+            <input type="password" name="{{ name }}" value="{{ value }}" class="form-control ">
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro select(class,label,from,required) %}
+    <div class="{{ class }}">
+        <div class="form-group">
+            {% if label is not null %}
+                <label class="control-label">
+                    {{ label }} {% if required==true %}<span class="text-danger">*</span>{% endif %}
+                </label>
+            {% endif %}
+            {{ form_widget(from, {'attr': {'class': 'search-select'}}) }}
+            {{ form_errors(from) | raw }}
+        </div>
+    </div>
+{% endmacro %}
+{% macro htmlDate(class,label,name,required=false,placeholder=null) %}
+    <div class="{{ class }}">
+        <div class="form-group">
+            {% if label is not null %}
+                <label class="control-label">
+                    {{ label|raw }} {% if required %}<span class="text-danger">*</span>{% endif %}
+                </label>
+            {% endif %}
+            <input type="date" name="{{ name }}" class="form-control" {% if required %}required{% endif %}
+                   placeholder="{{ placeholder }}">
+        </div>
+    </div>
+{% endmacro %}
+{% macro file(class,label,from,required) %}
+    <div class="{{ class }}">
+        <div class="form-group">
+            <label class="control-label">
+                {{ label }} {% if required==true %}<span class="symbol required"></span>{% endif %}
+            </label>
+            <label class="custom-file d-block">
+              {{ form_widget(from,{'attr': {'class': 'custom-file-input'}}) | raw }}
+              {{ form_errors(from) | raw }}
+              <span class="custom-file-control"></span>
+            </label>
+        </div>
+    </div>
+{% endmacro %}
+{% macro switch( class,label,v) %}
+    <div class="{{ class }}">
+        <div class="form-group">
+            <div class="form-check">
+            <label class="custom-control custom-checkbox">
+                {{ form_widget(v ,{'attr': {'class': 'custom-control-input'}}) }}
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">{{ label }}</span>
+                {{ form_errors(v) | raw }}
+            </label>
+            </div>
+
+        </div>
+    </div>
+{% endmacro %}
+
+<input class="form-control" type="number" value="42" id="example-number-input">
+{% macro submit(label) %}
+    <hr>
+    <div class="row">
+        <div class="col-md-4 text-xs-right">
+            <button class="btn btn-info" type="submit">
+                {{ label }} <i class="fa fa-arrow-circle-right"></i>
+            </button>
+        </div>
+    </div>
+{% endmacro %}
